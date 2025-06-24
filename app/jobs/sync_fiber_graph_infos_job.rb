@@ -1,6 +1,5 @@
 class SyncFiberGraphInfosJob
   include Sidekiq::Worker
-  queue_as :default
 
   attr_accessor :graph_node_ids, :graph_channel_outpoint, :fiber_node_url
 
@@ -37,8 +36,8 @@ class SyncFiberGraphInfosJob
     data = rpc.graph_nodes(@fiber_node_url, { limit: "0x64", after: last_cursor })
     data.dig("result", "nodes").each do |node|
       graph_node_id = upsert_graph_node(node)
-      if (udt_cfg_infos = node["udt_cfg_infos"]).present?
-        upsert_udt_cfg_infos(graph_node_id, udt_cfg_infos)
+      if (udt_cfg_infos = node["udt_cfg_infos"]).present? && graph_node_id.present?
+        upsert_udt_cfg_infos(graph_node_id[0]["id"], udt_cfg_infos)
       end
     end
     data.dig("result", "last_cursor")

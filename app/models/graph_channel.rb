@@ -1,4 +1,12 @@
 class GraphChannel < ApplicationRecord
+  belongs_to :ckb_udt, class_name: "Ckb::Udt"
+
+  def udt_type_hash
+    if udt_type_script
+      type_script = CKB::Types::Script.new(**udt_type_script.symbolize_keys)
+      type_script.compute_hash
+    end
+  end
 end
 
 # == Schema Information

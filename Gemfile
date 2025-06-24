@@ -65,6 +65,7 @@ group :development, :test do
 end
 
 gem "active_interaction", "~> 5.5"
+gem "ckb-sdk-ruby", github: "nervosnetwork/ckb-sdk-ruby", require: "ckb"
 gem "faraday"
 gem "pagy"
 gem "paranoia"

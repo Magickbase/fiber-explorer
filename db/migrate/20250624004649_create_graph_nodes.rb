@@ -17,9 +17,9 @@ class CreateGraphNodes < ActiveRecord::Migration[8.0]
       t.bigint :graph_node_id
       t.bigint :ckb_udt_id
       t.string :name
-      t.jsonb :script, default: {}
+      t.jsonb :script
       t.bigint :auto_accept_amount
-      t.jsonb :cell_deps, default: []
+      t.jsonb :cell_deps
       t.datetime :deleted_at
 
       t.timestamps

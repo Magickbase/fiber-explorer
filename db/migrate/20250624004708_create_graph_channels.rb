@@ -9,7 +9,7 @@ class CreateGraphChannels < ActiveRecord::Migration[8.0]
       t.jsonb :update_info_of_node2, default: {}
       t.bigint :capacity
       t.string :chain_hash
-      t.jsonb :udt_type_script, default: {}
+      t.jsonb :udt_type_script
       t.bigint :ckb_udt_id
       t.bigint :ckb_open_tx_id
       t.bigint :ckb_close_tx_id

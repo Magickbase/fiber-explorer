@@ -41,8 +41,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_24_063650) do
   end
 
   create_table "ckb_udts", force: :cascade do |t|
+    t.string "type_hash"
+    t.string "full_name"
+    t.string "symbol"
+    t.integer "decimal"
+    t.text "icon"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["type_hash"], name: "index_ckb_udts_on_type_hash", unique: true
   end
 
   create_table "graph_channels", force: :cascade do |t|
@@ -54,7 +60,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_24_063650) do
     t.jsonb "update_info_of_node2", default: {}
     t.bigint "capacity"
     t.string "chain_hash"
-    t.jsonb "udt_type_script", default: {}
+    t.jsonb "udt_type_script"
     t.bigint "ckb_udt_id"
     t.bigint "ckb_open_tx_id"
     t.bigint "ckb_close_tx_id"
@@ -85,9 +91,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_24_063650) do
     t.bigint "graph_node_id"
     t.bigint "ckb_udt_id"
     t.string "name"
-    t.jsonb "script", default: {}
+    t.jsonb "script"
     t.bigint "auto_accept_amount"
-    t.jsonb "cell_deps", default: []
+    t.jsonb "cell_deps"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

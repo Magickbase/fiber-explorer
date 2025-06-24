@@ -1,6 +1,13 @@
 class UdtCfgInfo < ApplicationRecord
   belongs_to :graph_node
   belongs_to :ckb_udt, class_name: "Ckb::Udt"
+
+  def type_hash
+    if script
+      type_script = CKB::Types::Script.new(**script.symbolize_keys)
+      type_script.compute_hash
+    end
+  end
 end
 
 # == Schema Information

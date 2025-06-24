@@ -7,3 +7,9 @@ production:
   - critical
   - default
   - low
+
+:scheduler:
+  :schedule:
+    SyncFiberGraphInfosJob:
+      cron: '0 */4 * * *'
+      description: "Sync fiber graph nodes and channels"
