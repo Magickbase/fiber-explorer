@@ -1,0 +1,26 @@
+class UdtCfgInfo < ApplicationRecord
+  belongs_to :graph_node
+  belongs_to :ckb_udt, class_name: "Ckb::Udt"
+end
+
+# == Schema Information
+#
+# Table name: udt_cfg_infos
+#
+#  id                 :bigint           not null, primary key
+#  auto_accept_amount :bigint
+#  cell_deps          :jsonb
+#  deleted_at         :datetime
+#  name               :string
+#  script             :jsonb
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  ckb_udt_id         :bigint
+#  graph_node_id      :bigint
+#
+# Indexes
+#
+#  index_udt_cfg_infos_on_deleted_at                (deleted_at)
+#  index_udt_cfg_infos_on_graph_node_id             (graph_node_id)
+#  index_udt_cfg_infos_on_graph_node_id_and_script  (graph_node_id,script) UNIQUE
+#
