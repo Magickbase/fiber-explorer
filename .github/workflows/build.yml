@@ -1,0 +1,40 @@
+name: Pull, build docker image and push to repository
+on:
+  workflow_call:
+    secrets:
+      GHCR_USERNAME:
+        required: true
+      GHCR_TOKEN:
+        required: true
+    outputs:
+      # Image name
+      image-name:
+        description: URL for docker image
+        value: ${{ jobs.build.outputs.image-name }}
+      # Image tag (version)
+      image-tag:
+        description: image tag(version)
+        value: ${{ jobs.build.outputs.image-tag }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      image-name: "${{ steps.docker_build.outputs.imageFullName }}"
+      image-tag: "${{ steps.docker_build.outputs.tags }}"
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Build and push
+        id: docker_build
+        uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: fiber-explorer
+          registry: ghcr.io
+          githubOrg: magickbase # optional
+          username: magickbase
+          password: ${{ secrets.GHCR_TOKEN }}
+      - name: DeleteUselessImages
+        run: docker images && docker images| grep "fiber-explorer" | grep -v "IMAGE ID" | awk 'NR>1 {print $3}' | xargs -I {}  docker rmi {}
+      - name: CheckImage
+        run: docker images && df -hT && df -ih
