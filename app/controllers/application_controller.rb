@@ -21,6 +21,10 @@ class ApplicationController < ActionController::Base
     render json: ApiErrorSerializer.new(error), status: error.status
   end
 
+  def render_success
+    render json: { data: { success: true } }, status: :ok
+  end
+
   def page_info(pagy)
     {
       total_count: pagy.count,

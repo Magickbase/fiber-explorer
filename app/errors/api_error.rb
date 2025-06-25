@@ -27,4 +27,10 @@ class ApiError < StandardError
       super(code: 1002, status: 400, message: "page overflow")
     end
   end
+
+  class InvalidFilterError < ApiError
+    def initialize(message)
+      super(code: 1003, status: 400, message:)
+    end
+  end
 end

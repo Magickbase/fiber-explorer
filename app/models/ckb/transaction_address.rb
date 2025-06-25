@@ -13,6 +13,7 @@ end
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  ckb_transaction_id :bigint
+#  graph_channel_id   :bigint
 #
 # Indexes
 #

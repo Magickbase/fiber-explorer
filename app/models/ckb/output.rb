@@ -4,6 +4,13 @@ module Ckb
     belongs_to :ckb_udt, class_name: "Ckb::Udt", optional: true
 
     delegate :tx_hash, to: :ckb_transaction
+
+    def ckb_udt_info
+      return unless ckb_udt
+
+      data = ckb_udt.as_json(only: %i[full_name symbol decimal icon type_hash])
+      CkbUtils.hash_value_to_s(data)
+    end
   end
 end
 

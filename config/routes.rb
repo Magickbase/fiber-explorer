@@ -17,15 +17,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  namespace :stripe do
-    resources :checkout_sessions, param: :session_uid, only: %i[index create destroy]
-    resource :subscription, only: %i[show update destroy]
-    resources :products, only: :index
-    resources :webhooks do
-      post :callback, on: :collection
-    end
+  resources :graph_nodes, param: :node_id, only: %i[index show] do
+    resources :graph_channels, only: :index
+    resources :ckb_transactions, only: :index
   end
-  resources :api_calls, only: %i[index create]
-  resources :api_usage, only: :show
-  resource :user_info, only: :show
+  resources :graph_channels, only: :show
+  resources :graph_topology, only: :index
 end

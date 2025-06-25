@@ -9,6 +9,7 @@ class CreateCkbTransactions < ActiveRecord::Migration[8.0]
     end
 
     create_table :ckb_transaction_addresses do |t|
+      t.bigint :graph_channel_id
       t.bigint :ckb_transaction_id
       t.string :address_hash
 
