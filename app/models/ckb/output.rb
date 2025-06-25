@@ -2,6 +2,8 @@ module Ckb
   class Output < ApplicationRecord
     belongs_to :ckb_transaction, class_name: "Ckb::Transaction"
     belongs_to :ckb_udt, class_name: "Ckb::Udt", optional: true
+
+    delegate :tx_hash, to: :ckb_transaction
   end
 end
 

@@ -1,8 +1,8 @@
-class SyncCkbTransactionsJob
+class SyncCkbOpenTransactionsJob
   include Sidekiq::Job
 
   def perform
-    graph_channels = GraphChannel.with_deleted.GraphChannel.where(ckb_open_transaction_id: nil)
+    graph_channels = GraphChannel.with_deleted.where(ckb_open_transaction_id: nil)
     graph_channels.each do |channel|
       process_channel_open_tx(channel)
       sleep 3

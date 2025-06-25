@@ -1,4 +1,6 @@
-class Ckb::Udt < ApplicationRecord
+module Ckb
+  class Udt < ApplicationRecord
+  end
 end
 
 # == Schema Information

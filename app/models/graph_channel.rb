@@ -3,7 +3,11 @@ class GraphChannel < ApplicationRecord
 
   belongs_to :ckb_udt, class_name: "Ckb::Udt", optional: true
   belongs_to :ckb_open_transaction, class_name: "Ckb::Transaction", optional: true
+  belongs_to :ckb_close_transaction, class_name: "Ckb::Transaction", optional: true
   belongs_to :ckb_output, class_name: "Ckb::Output", optional: true
+
+  # 同步已关闭的 graph_channel 可能还未同步到 consumed transaction
+  after_destroy { SyncCkbCloseTransactionsJob.perform_async(id) }
 
   def udt_type_hash
     if udt_type_script

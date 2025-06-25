@@ -13,3 +13,7 @@ production:
     SyncFiberGraphInfosJob:
       cron: '0 */4 * * *'
       description: "Sync fiber graph nodes and channels"
+
+    SyncCkbCloseTransactionsJob:
+      every: "2h"
+      description: "Sync closed transactions of fiber graph channels"
