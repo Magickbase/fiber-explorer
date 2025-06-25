@@ -5,7 +5,7 @@ class SyncCkbOpenTransactionsJob
     graph_channels = GraphChannel.with_deleted.where(ckb_open_transaction_id: nil)
     graph_channels.each do |channel|
       process_channel_open_tx(channel)
-      sleep 3
+      sleep 2
     end
   end
 

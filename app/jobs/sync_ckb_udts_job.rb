@@ -1,5 +1,5 @@
 class SyncCkbUdtsJob
-  include Sidekiq::Worker
+  include Sidekiq::Job
 
   def perform
     # 更新 ckb_udts
