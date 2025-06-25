@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_24_063650) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_25_012143) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -40,6 +40,35 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_24_063650) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "ckb_outputs", force: :cascade do |t|
+    t.bigint "ckb_transaction_id"
+    t.decimal "capacity", precision: 64, scale: 2
+    t.decimal "amount", precision: 40
+    t.string "address_hash"
+    t.integer "cell_index"
+    t.bigint "ckb_udt_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ckb_transaction_id", "cell_index"], name: "index_ckb_outputs_on_ckb_transaction_id_and_cell_index", unique: true
+  end
+
+  create_table "ckb_transaction_addresses", force: :cascade do |t|
+    t.bigint "ckb_transaction_id"
+    t.string "address_hash"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ckb_transaction_id", "address_hash"], name: "idx_on_ckb_transaction_id_address_hash_dca6657908", unique: true
+  end
+
+  create_table "ckb_transactions", force: :cascade do |t|
+    t.string "tx_hash"
+    t.bigint "block_number"
+    t.bigint "block_timestamp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tx_hash"], name: "index_ckb_transactions_on_tx_hash", unique: true
+  end
+
   create_table "ckb_udts", force: :cascade do |t|
     t.string "type_hash"
     t.string "full_name"
@@ -62,10 +91,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_24_063650) do
     t.string "chain_hash"
     t.jsonb "udt_type_script"
     t.bigint "ckb_udt_id"
-    t.bigint "ckb_open_tx_id"
-    t.bigint "ckb_close_tx_id"
+    t.bigint "ckb_open_transaction_id"
+    t.bigint "ckb_close_transaction_id"
     t.bigint "ckb_output_id"
-    t.bigint "ckb_address_id"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

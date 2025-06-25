@@ -1,5 +1,9 @@
 class GraphChannel < ApplicationRecord
-  belongs_to :ckb_udt, class_name: "Ckb::Udt"
+  acts_as_paranoid
+
+  belongs_to :ckb_udt, class_name: "Ckb::Udt", optional: true
+  belongs_to :ckb_open_transaction, class_name: "Ckb::Transaction", optional: true
+  belongs_to :ckb_output, class_name: "Ckb::Output", optional: true
 
   def udt_type_hash
     if udt_type_script
@@ -13,24 +17,23 @@ end
 #
 # Table name: graph_channels
 #
-#  id                   :bigint           not null, primary key
-#  capacity             :bigint
-#  chain_hash           :string
-#  channel_outpoint     :string
-#  created_timestamp    :bigint
-#  deleted_at           :datetime
-#  node1                :string
-#  node2                :string
-#  udt_type_script      :jsonb
-#  update_info_of_node1 :jsonb
-#  update_info_of_node2 :jsonb
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  ckb_address_id       :bigint
-#  ckb_close_tx_id      :bigint
-#  ckb_open_tx_id       :bigint
-#  ckb_output_id        :bigint
-#  ckb_udt_id           :bigint
+#  id                       :bigint           not null, primary key
+#  capacity                 :bigint
+#  chain_hash               :string
+#  channel_outpoint         :string
+#  created_timestamp        :bigint
+#  deleted_at               :datetime
+#  node1                    :string
+#  node2                    :string
+#  udt_type_script          :jsonb
+#  update_info_of_node1     :jsonb
+#  update_info_of_node2     :jsonb
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#  ckb_close_transaction_id :bigint
+#  ckb_open_transaction_id  :bigint
+#  ckb_output_id            :bigint
+#  ckb_udt_id               :bigint
 #
 # Indexes
 #

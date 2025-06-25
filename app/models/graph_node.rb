@@ -1,4 +1,7 @@
 class GraphNode < ApplicationRecord
+  acts_as_paranoid
+
+  has_many :udt_cfg_infos, dependent: :destroy
 end
 
 # == Schema Information

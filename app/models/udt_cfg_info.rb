@@ -1,4 +1,6 @@
 class UdtCfgInfo < ApplicationRecord
+  acts_as_paranoid
+
   belongs_to :graph_node
   belongs_to :ckb_udt, class_name: "Ckb::Udt"
 

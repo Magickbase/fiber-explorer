@@ -11,10 +11,9 @@ class CreateGraphChannels < ActiveRecord::Migration[8.0]
       t.string :chain_hash
       t.jsonb :udt_type_script
       t.bigint :ckb_udt_id
-      t.bigint :ckb_open_tx_id
-      t.bigint :ckb_close_tx_id
+      t.bigint :ckb_open_transaction_id
+      t.bigint :ckb_close_transaction_id
       t.bigint :ckb_output_id
-      t.bigint :ckb_address_id
       t.datetime :deleted_at
 
       t.timestamps
