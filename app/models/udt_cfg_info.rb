@@ -10,6 +10,11 @@ class UdtCfgInfo < ApplicationRecord
       type_script.compute_hash
     end
   end
+
+  def ckb_udt_info
+    data = ckb_udt.as_json(only: %i[full_name symbol decimal icon type_hash]).merge(auto_accept_amount:)
+    CkbUtils.hash_value_to_s(data)
+  end
 end
 
 # == Schema Information

@@ -1,5 +1,5 @@
 class SyncFiberGraphInfosJob
-  include Sidekiq::Worker
+  include Sidekiq::Job
 
   attr_accessor :graph_node_ids, :graph_channel_outpoint, :fiber_node_url
 

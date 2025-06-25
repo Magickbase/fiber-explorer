@@ -5,7 +5,7 @@ class SyncCkbOpenTransactionsJob
     graph_channels = GraphChannel.with_deleted.where(ckb_open_transaction_id: nil)
     graph_channels.each do |channel|
       process_channel_open_tx(channel)
-      sleep 3
+      sleep 2
     end
   end
 
@@ -36,15 +36,16 @@ class SyncCkbOpenTransactionsJob
 
       channel.update!(ckb_open_transaction:, ckb_output:)
 
-      upsert_ckb_transaction_addresses(ckb_open_transaction, tx_attrs)
+      upsert_ckb_transaction_addresses(channel, ckb_open_transaction, tx_attrs)
     end
   end
 
-  def upsert_ckb_transaction_addresses(ckb_transaction, tx_attrs)
+  def upsert_ckb_transaction_addresses(graph_channel, ckb_transaction, tx_attrs)
     input_addrs  = tx_attrs["display_inputs"].pluck("address_hash")
     output_addrs = tx_attrs["display_outputs"].pluck("address_hash")
     addresses = (input_addrs + output_addrs).uniq.compact.map do |addr|
       {
+        graph_channel_id: graph_channel.id,
         ckb_transaction_id: ckb_transaction.id,
         address_hash: addr,
       }

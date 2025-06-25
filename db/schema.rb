@@ -53,6 +53,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_25_012143) do
   end
 
   create_table "ckb_transaction_addresses", force: :cascade do |t|
+    t.bigint "graph_channel_id"
     t.bigint "ckb_transaction_id"
     t.string "address_hash"
     t.datetime "created_at", null: false

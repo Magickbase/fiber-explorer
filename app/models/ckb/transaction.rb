@@ -1,5 +1,6 @@
 module Ckb
   class Transaction < ApplicationRecord
+    has_many :ckb_outputs, class_name: "Ckb::Output"
   end
 end
 
