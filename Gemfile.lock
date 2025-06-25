@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/nervosnetwork/ckb-sdk-ruby.git
+  revision: 4dfcbb6829ef9c0d6abc67a15a20dc53f1189ff4
+  specs:
+    ckb-sdk-ruby (0.103.0)
+      net-http-persistent (~> 4.0.1)
+      rbnacl (~> 7.1.1)
+      rbsecp256k1 (~> 5.1.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -129,6 +138,13 @@ GEM
       logger
     faraday-net_http (3.4.0)
       net-http (>= 0.5.0)
+    ffi (1.17.2-aarch64-linux-gnu)
+    ffi (1.17.2-aarch64-linux-musl)
+    ffi (1.17.2-arm-linux-gnu)
+    ffi (1.17.2-arm-linux-musl)
+    ffi (1.17.2-arm64-darwin)
+    ffi (1.17.2-x86_64-linux-gnu)
+    ffi (1.17.2-x86_64-linux-musl)
     formtastic (5.0.0)
       actionpack (>= 6.0.0)
     formtastic_i18n (0.7.0)
@@ -187,10 +203,13 @@ GEM
       net-smtp
     marcel (1.0.4)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.9)
     minitest (5.25.5)
     msgpack (1.8.0)
     net-http (0.6.0)
       uri
+    net-http-persistent (4.0.6)
+      connection_pool (~> 2.2, >= 2.2.4)
     net-imap (0.5.8)
       date
       net-protocol
@@ -218,10 +237,13 @@ GEM
     orm_adapter (0.5.0)
     pagy (9.3.4)
     parallel (1.27.0)
+    paranoia (3.0.1)
+      activerecord (>= 6, < 8.1)
     parser (3.3.8.0)
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
+    pkg-config (1.6.2)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -279,6 +301,12 @@ GEM
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
+    rbnacl (7.1.2)
+      ffi (~> 1)
+    rbsecp256k1 (5.1.1)
+      mini_portile2 (~> 2.8)
+      pkg-config (~> 1.5)
+      rubyzip (~> 2.3)
     rdoc (6.14.0)
       erb
       psych (>= 4.0.0)
@@ -321,6 +349,7 @@ GEM
       rubocop-performance (>= 1.24)
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
+    rubyzip (2.4.1)
     rufus-scheduler (3.9.2)
       fugit (~> 1.1, >= 1.11.1)
     securerandom (0.4.1)
@@ -377,6 +406,7 @@ DEPENDENCIES
   annotaterb
   bootsnap
   brakeman
+  ckb-sdk-ruby!
   debug
   devise
   dotenv-rails
@@ -385,6 +415,7 @@ DEPENDENCIES
   hiredis-client
   jsonapi-serializer
   pagy
+  paranoia
   pg (~> 1.1)
   puma (>= 5.0)
   rack-cors
