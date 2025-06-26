@@ -30,8 +30,8 @@ FROM base AS build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install -y build-essential git libpq-dev libcurl4 libjemalloc2 libsecp256k1-dev  libsodium-dev && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev pkg-config && \
+    apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev pkg-config  \
+    libtool libffi-dev libssl-dev libgmp-dev python3-dev automake && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install application gems
