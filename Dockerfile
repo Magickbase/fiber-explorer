@@ -31,7 +31,7 @@ FROM base AS build
 # Install packages needed to build gems
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev pkg-config  \
-    libtool libffi-dev libssl-dev libgmp-dev python3-dev automake libsodium-dev libsodium23 && \
+    libtool libffi-dev libssl-dev libgmp-dev python3-dev automake libsodium-dev && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install application gems
@@ -48,6 +48,13 @@ RUN bundle exec bootsnap precompile app/ lib/
 
 # Final stage for app image
 FROM base
+
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+      libsodium23 && \
+    ldconfig && \
+    ln -sf /usr/lib/x86_64-linux-gnu/libsodium.so.23 /usr/lib/x86_64-linux-gnu/libsodium.so || true && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
