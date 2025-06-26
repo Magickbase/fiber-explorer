@@ -12,7 +12,7 @@ jobs:
     needs: build
     strategy:
       matrix:
-        workload: [fiber-explorer, fiber-explorer-sidekiq]
+        workload: [fiber-explorer-api, fiber-explorer-sidekiq]
     uses: ./.github/workflows/update-image.yml
     with:
       k8s-namespace: fiber-explorer
