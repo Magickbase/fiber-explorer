@@ -1,8 +1,6 @@
 class SyncCkbCloseTransactionsJob
   include Sidekiq::Job
 
-  sidekiq_options queue: :low
-
   attr_accessor :closed_channel_ids
 
   def perform(channel_id = nil)

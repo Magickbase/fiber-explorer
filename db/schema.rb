@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_25_012143) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_01_073943) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -114,6 +114,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_25_012143) do
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_graph_nodes_on_deleted_at"
     t.index ["node_id"], name: "index_graph_nodes_on_node_id", unique: true
+  end
+
+  create_table "statistics", force: :cascade do |t|
+    t.integer "total_nodes"
+    t.integer "total_channels"
+    t.bigint "total_capacity"
+    t.jsonb "total_liquidity"
+    t.bigint "created_timestamp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["created_timestamp"], name: "index_statistics_on_created_timestamp", unique: true
   end
 
   create_table "udt_cfg_infos", force: :cascade do |t|

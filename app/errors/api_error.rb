@@ -33,4 +33,10 @@ class ApiError < StandardError
       super(code: 1003, status: 400, message:)
     end
   end
+
+  class InvalidIndicatorError < ApiError
+    def initialize(indicator)
+      super(code: 1004, status: 400, message: "invalid indicator: #{indicator}")
+    end
+  end
 end
