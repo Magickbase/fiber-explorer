@@ -1,6 +1,6 @@
 module Ckb
   class Transaction < ApplicationRecord
-    has_many :ckb_outputs, class_name: "Ckb::Output"
+    has_many :ckb_outputs, class_name: "Ckb::Output", foreign_key: "ckb_transaction_id"
   end
 end
 
