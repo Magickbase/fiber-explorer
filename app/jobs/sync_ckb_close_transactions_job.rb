@@ -46,7 +46,7 @@ class SyncCkbCloseTransactionsJob
           block_timestamp: consumed_tx_attrs["block_timestamp"],
         ).find_or_create_by!(tx_hash: consumed_tx_hash)
 
-        upsert_ckb_outputs(ckb_close_transaction, consumed_tx_attrs)
+        upsert_ckb_outputs(ckb_close_transaction, consumed_tx_attrs, channel)
         upsert_ckb_transaction_addresses(channel, ckb_close_transaction, consumed_tx_attrs)
 
         channel.update!(ckb_close_transaction:)
@@ -56,7 +56,7 @@ class SyncCkbCloseTransactionsJob
     end
   end
 
-  def upsert_ckb_outputs(ckb_transaction, tx_attrs)
+  def upsert_ckb_outputs(ckb_transaction, tx_attrs, channel)
     outputs = tx_attrs["display_outputs"]
     output_attrs = outputs.map do |output|
       {
@@ -65,7 +65,7 @@ class SyncCkbCloseTransactionsJob
         capacity: output["capacity"],
         amount: output.dig("extra_info", "amount"),
         address_hash: output["address_hash"],
-        ckb_udt: channel.ckb_udt,
+        ckb_udt_id: channel.ckb_udt&.id,
       }
     end
 
