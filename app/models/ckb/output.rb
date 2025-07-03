@@ -8,8 +8,7 @@ module Ckb
     def ckb_udt_info
       return unless ckb_udt
 
-      data = ckb_udt.as_json(only: %i[full_name symbol decimal icon type_hash])
-      CkbUtils.hash_value_to_s(data)
+      ckb_udt.as_json(only: %i[full_name symbol decimal icon type_hash])
     end
   end
 end

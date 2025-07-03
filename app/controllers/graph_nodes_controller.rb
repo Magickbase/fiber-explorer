@@ -2,7 +2,7 @@ class GraphNodesController < ApplicationController
   def index
     pagy, items = GraphNodes::Index.run!(pagy_params:)
 
-    render json: GraphNodeSerializer.new(items, meta: page_info(pagy)).serializable_hash
+    render json: GraphNodeSerializer.new(items, meta: page_info(pagy), params: { minimal: true }).serializable_hash
   end
 
   def show

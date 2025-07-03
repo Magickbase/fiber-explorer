@@ -3,7 +3,7 @@ class GraphChannelSerializer
 
   cache_options store: Rails.cache, namespace: "jsonapi-serializer", expires_in: 1.minute
 
-  attributes :channel_outpoint, :node1, :node2, :chain_hash, :ckb_open_transaction_info, :ckb_close_transaction_info, :ckb_udt_info
+  attributes :channel_outpoint, :node1, :node2, :chain_hash, :ckb_open_transaction_info, :ckb_close_transaction_info
 
   attribute :update_info_of_node1 do |object|
     CkbUtils.hash_value_to_s(object.update_info_of_node1)
@@ -19,5 +19,11 @@ class GraphChannelSerializer
 
   attribute :capacity do |object|
     object.capacity.to_s
+  end
+
+  attribute :ckb_udt_info do |object|
+    if object.ckb_udt_info
+      CkbUtils.hash_value_to_s(object.ckb_udt_info)
+    end
   end
 end
