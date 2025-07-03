@@ -11,7 +11,7 @@ class CkbTransactionSerializer
   attribute(:block_number) { _1[:block_number].to_s }
   attribute(:block_timestamp) { _1[:block_timestamp].to_s }
   attribute(:capacity, if: ->(object) { object[:is_open] }) { _1[:capacity].to_s }
-  attribute(:ckb_udt_info,  if: ->(object) { object[:is_udt] }) { _1[:ckb_udt_info] }
+  attribute(:ckb_udt_info,  if: ->(object) { object[:is_udt] }) { CkbUtils.hash_value_to_s(_1[:ckb_udt_info]) }
   attribute(:address_hash,  if: ->(object) { object[:is_open] }) { _1[:address_hash] }
   attribute(:close_accounts, if: ->(object) { !object[:is_open] }) { _1[:close_accounts] }
 end

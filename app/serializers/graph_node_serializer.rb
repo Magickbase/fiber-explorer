@@ -33,7 +33,9 @@ class GraphNodeSerializer
     object.open_channels.sum(&:capacity).to_s
   end
 
-  attribute :udt_cfg_infos do |object|
-    object.udt_cfg_infos.map(&:ckb_udt_info)
+  attribute :udt_cfg_infos, if: Proc.new { |_record, params|
+    !params[:minimal]
+  } do |object|
+    object.enriched_udt_cfg_infos.map { CkbUtils.hash_value_to_s(_1) }
   end
 end

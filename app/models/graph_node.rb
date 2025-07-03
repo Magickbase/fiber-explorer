@@ -32,6 +32,26 @@ class GraphNode < ApplicationRecord
   def created_timestamp
     [(created_at.utc.to_f * 1000).to_i, last_updated_timestamp].min
   end
+
+  def enriched_udt_cfg_infos
+    liquidity_map = liquidity_map_by_type_hash
+
+    udt_cfg_infos.map do |info|
+      udt_info = info.ckb_udt_info || {}
+      type_hash = udt_info["type_hash"].to_s
+      udt_info.merge(total_liquidity: liquidity_map[type_hash] || 0)
+    end
+  end
+
+  def liquidity_map_by_type_hash
+    open_channels.each_with_object(Hash.new(0)) do |channel, result|
+      output = channel.ckb_output
+      next unless output&.ckb_udt
+
+      type_hash = output.ckb_udt.type_hash
+      result[type_hash] += output.amount
+    end
+  end
 end
 
 # == Schema Information
