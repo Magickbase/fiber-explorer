@@ -18,8 +18,6 @@ class SyncFiberGraphInfosJob
 
     # 异步同步 ckb udts
     SyncCkbUdtsJob.perform_async
-    # 异步同步 open channels 对应的 ckb open transactions
-    SyncCkbOpenTransactionsJob.perform_async
   end
 
   def fetch_graph_infos(data_type)

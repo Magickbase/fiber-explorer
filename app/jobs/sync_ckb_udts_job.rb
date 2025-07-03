@@ -31,6 +31,9 @@ class SyncCkbUdtsJob
 
       channel.update!(ckb_udt:)
     end
+
+    # 异步同步 open channels 对应的 ckb open transactions
+    SyncCkbOpenTransactionsJob.perform_async
   end
 
   def fetch_udt_attrs(type_hash)
