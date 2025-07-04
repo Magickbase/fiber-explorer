@@ -24,4 +24,5 @@ Rails.application.routes.draw do
   resources :graph_channels, only: :show
   resources :graph_topology, only: :index
   resources :statistics, only: %i[index show]
+  resources :search, only: :index
 end
