@@ -1,0 +1,104 @@
+{
+  "CkbTransactions": {
+    "type": "object",
+    "description": "CKB transactions related to a specific graph node",
+    "required": ["data", "meta"],
+    "properties": {
+      "data": {
+        "type": "array",
+        "description": "List of CKB transaction resources",
+        "items": {
+          "type": "object",
+          "required": ["id", "type", "attributes"],
+          "properties": {
+            "id": {
+              "type": "string",
+              "nullable": true
+            },
+            "type": {
+              "type": "string",
+              "enum": ["ckb_transaction"],
+              "description": "Resource type, always 'ckb_transaction'"
+            },
+            "attributes": {
+              "type": "object",
+              "required": [
+                "is_open",
+                "is_udt",
+                "tx_hash",
+                "block_number",
+                "block_timestamp"
+              ],
+              "properties": {
+                "is_open": {
+                  "type": "boolean",
+                  "description": "Whether this is an open transaction"
+                },
+                "is_udt": {
+                  "type": "boolean",
+                  "description": "Whether this transaction involves a UDT"
+                },
+                "tx_hash": {
+                  "type": "string",
+                  "description": "The transaction hash"
+                },
+                "block_number": {
+                  "type": "string",
+                  "description": "Block number in which the transaction is included"
+                },
+                "block_timestamp": {
+                  "type": "string",
+                  "description": "Timestamp of the block including the transaction"
+                },
+                "close_accounts": {
+                  "type": "array",
+                  "description": "Accounts involved in closing the transaction",
+                  "nullable": true,
+                  "items": {
+                    "type": "object",
+                    "required": ["capacity", "address_hash"],
+                    "properties": {
+                      "capacity": {
+                        "type": "string",
+                        "description": "Amount of capacity involved"
+                      },
+                      "ckb_udt_info": {
+                        "type": ["object", "null"],
+                        "nullable": true,
+                        "description": "Optional UDT info if present",
+                        "properties": {
+                          "full_name": {
+                            "type": "string"
+                          },
+                          "symbol": {
+                            "type": "string"
+                          },
+                          "decimal": {
+                            "type": "integer"
+                          },
+                          "icon": {
+                            "type": "string"
+                          },
+                          "type_hash": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "address_hash": {
+                        "type": "string",
+                        "description": "The receiving address"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "meta": {
+        "$ref": "#/components/schemas/PaginationMeta"
+      }
+    }
+  }
+}

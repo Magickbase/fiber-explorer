@@ -39,4 +39,10 @@ class ApiError < StandardError
       super(code: 1004, status: 400, message: "invalid indicator: #{indicator}")
     end
   end
+
+  class NotFoundError < ApiError
+    def initialize(resource:, value:, field: "id")
+      super(code: 1005, status: 404, message: "#{resource} with #{field}=#{value} not found")
+    end
+  end
 end

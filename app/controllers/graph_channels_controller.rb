@@ -6,9 +6,11 @@ class GraphChannelsController < ApplicationController
   end
 
   def show
-    graph_channel = GraphChannel.find_by(id: params[:id])
+    graph_channel = GraphChannel.find_by(id: Integer(params[:id]))
 
     render json: GraphChannelSerializer.new(graph_channel).serializable_hash
+  rescue ArgumentError
+    raise ApiError::NotFoundError.new(resource: "GraphChannel", value: params[:id])
   end
 
   def filter_params
