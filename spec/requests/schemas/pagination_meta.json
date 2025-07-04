@@ -1,0 +1,16 @@
+{
+  "PaginationMeta": {
+    "type": "object",
+    "required": ["total_count", "current_page"],
+    "properties": {
+      "total_count": {
+        "type": "integer",
+        "description": "Total number of matching records"
+      },
+      "current_page": {
+        "type": "integer",
+        "description": "Current page number"
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "GraphTopology": {
+    "type": "object",
+    "description": "List of graph topology items",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "type": "array",
+        "description": "Array of graph_topology resources",
+        "items": {
+          "type": "object",
+          "required": [
+            "type",
+            "attributes"
+          ],
+          "properties": {
+            "id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "nullable": true
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "graph_topology"
+              ],
+              "description": "Resource type, always 'graph_topology'"
+            },
+            "attributes": {
+              "type": "object",
+              "required": [
+                "node_id",
+                "addresses",
+                "connected_node_ids"
+              ],
+              "properties": {
+                "node_id": {
+                  "type": "string",
+                  "description": "The identity public key of the node"
+                },
+                "addresses": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "The addresses of the node"
+                },
+                "connected_node_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "List of node IDs this node is connected to"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

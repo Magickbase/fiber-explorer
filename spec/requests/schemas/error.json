@@ -1,0 +1,68 @@
+{
+  "error.BAD_REQUEST": {
+    "type": "object",
+    "required": [
+      "code",
+      "status",
+      "message"
+    ],
+    "properties": {
+      "code": {
+        "type": "string",
+        "example": "1000"
+      },
+      "status": {
+        "type": "string",
+        "example": "400"
+      },
+      "message": {
+        "type": "string",
+        "example": "params are missing"
+      }
+    }
+  },
+  "error.PAGE_OVERFLOW": {
+    "type": "object",
+    "required": [
+      "code",
+      "status",
+      "message"
+    ],
+    "properties": {
+      "code": {
+        "type": "string",
+        "example": "1002"
+      },
+      "status": {
+        "type": "string",
+        "example": "400"
+      },
+      "message": {
+        "type": "string",
+        "example": "page overflow"
+      }
+    }
+  },
+  "error.NOT_FOUND": {
+    "type": "object",
+    "required": [
+      "code",
+      "status",
+      "message"
+    ],
+    "properties": {
+      "code": {
+        "type": "string",
+        "example": "1005"
+      },
+      "status": {
+        "type": "string",
+        "example": "404"
+      },
+      "message": {
+        "type": "string",
+        "example": "GraphChannel with id=03ea0039f70d06eabd614ea8d4da730b865d1f61a05392d5b9967a93ecc0bb3996 not found"
+      }
+    }
+  }
+}

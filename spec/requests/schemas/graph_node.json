@@ -1,0 +1,182 @@
+{
+  "GraphNodes": {
+    "type": "object",
+    "description": "Get the list of nodes in the network graph",
+    "required": [
+      "data",
+      "meta"
+    ],
+    "properties": {
+      "data": {
+        "type": "array",
+        "description": "List of graph_node resources",
+        "items": {
+          "$ref": "#/components/schemas/GraphNodeResource"
+        }
+      },
+      "meta": {
+        "$ref": "#/components/schemas/PaginationMeta"
+      }
+    }
+  },
+  "GraphNode": {
+    "type": "object",
+    "description": "The Node information",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "$ref": "#/components/schemas/GraphNodeResource"
+      }
+    }
+  },
+  "GraphNodeResource": {
+    "type": "object",
+    "required": [
+      "id",
+      "type",
+      "attributes"
+    ],
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "graph_node"
+        ],
+        "description": "Resource type, always 'graph_node'"
+      },
+      "attributes": {
+        "type": "object",
+        "required": [
+          "addresses",
+          "chain_hash",
+          "node_name",
+          "node_id",
+          "peer_id",
+          "connected_node_ids",
+          "auto_accept_min_ckb_funding_amount",
+          "created_timestamp",
+          "last_updated_timestamp",
+          "timestamp",
+          "open_channels_count",
+          "total_capacity"
+        ],
+        "properties": {
+          "addresses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The addresses of the node"
+          },
+          "chain_hash": {
+            "type": "string",
+            "description": "The chain hash of the node"
+          },
+          "node_name": {
+            "type": "string",
+            "description": "The name of the node"
+          },
+          "node_id": {
+            "type": "string",
+            "description": "The identity public key of the node"
+          },
+          "peer_id": {
+            "type": "string",
+            "description": "Peer ID derived from node ID"
+          },
+          "connected_node_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "IDs of other nodes connected to this node"
+          },
+          "auto_accept_min_ckb_funding_amount": {
+            "type": "string",
+            "description": "The minimum CKB funding amount for automatically accepting open channel requests"
+          },
+          "created_timestamp": {
+            "type": "string",
+            "description": "Unix timestamp (ms) when the node was created"
+          },
+          "last_updated_timestamp": {
+            "type": "string",
+            "description": "Unix timestamp (ms) when the node was last updated"
+          },
+          "deleted_at_timestamp": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "nullable": true,
+            "description": "Timestamp (ms) when the node was deleted, or null if active"
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "The latest timestamp set by the owner for the node announcement. When a Node is online this timestamp will be updated to the latest value"
+          },
+          "open_channels_count": {
+            "type": "string",
+            "description": "Number of open channels connected to the node"
+          },
+          "total_capacity": {
+            "type": "string",
+            "description": "Total capacity (in shannon) held by the node"
+          },
+          "udt_cfg_infos": {
+            "type": "array",
+            "description": "UDT configuration infos announced by the node",
+            "nullable": true,
+            "items": {
+              "type": "object",
+              "required": [
+                "full_name",
+                "symbol",
+                "decimal",
+                "icon",
+                "type_hash",
+                "auto_accept_amount",
+                "total_liquidity"
+              ],
+              "properties": {
+                "full_name": {
+                  "type": "string",
+                  "description": "Full name of the UDT"
+                },
+                "symbol": {
+                  "type": "string",
+                  "description": "Symbol of the UDT"
+                },
+                "decimal": {
+                  "type": "string",
+                  "description": "Decimal precision"
+                },
+                "icon": {
+                  "type": "string",
+                  "description": "Icon as either a URL or a base64-encoded inline SVG string"
+                },
+                "type_hash": {
+                  "type": "string",
+                  "description": "Type hash of the UDT"
+                },
+                "auto_accept_amount": {
+                  "type": "string",
+                  "description": "Auto-accept amount of the UDT"
+                },
+                "total_liquidity": {
+                  "type": "string",
+                  "description": "Total liquidity of the UDT"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

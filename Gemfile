@@ -59,6 +59,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "annotaterb"
+  gem 'rspec-rails', '~> 8.0.0'
   gem "rubocop", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
@@ -69,3 +70,4 @@ gem "ckb-sdk-ruby", github: "nervosnetwork/ckb-sdk-ruby", require: "ckb"
 gem "faraday"
 gem "pagy"
 gem "paranoia"
+gem "rswag"

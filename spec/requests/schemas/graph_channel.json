@@ -1,0 +1,256 @@
+{
+  "GraphChannels": {
+    "type": "object",
+    "description": "Get the list of channels in the network graph",
+    "required": [
+      "data",
+      "meta"
+    ],
+    "properties": {
+      "data": {
+        "type": "array",
+        "description": "List of graph_channel resources",
+        "items": {
+          "$ref": "#/components/schemas/GraphChannelResource"
+        }
+      },
+      "meta": {
+        "$ref": "#/components/schemas/PaginationMeta"
+      }
+    }
+  },
+  "GraphChannel": {
+    "type": "object",
+    "description": "The channel info with two directions of channel",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "$ref": "#/components/schemas/GraphChannelResource"
+      }
+    }
+  },
+  "GraphChannelResource": {
+    "type": "object",
+    "required": [
+      "id",
+      "type",
+      "attributes"
+    ],
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "type": {
+        "type": "string",
+        "enum": [
+          "graph_channel"
+        ],
+        "description": "Resource type, always 'graph_channel'"
+      },
+      "attributes": {
+        "type": "object",
+        "required": [
+          "channel_outpoint",
+          "node1",
+          "node2",
+          "created_timestamp",
+          "update_info_of_node1",
+          "update_info_of_node2",
+          "capacity",
+          "chain_hash",
+          "ckb_open_transaction_info",
+          "ckb_close_transaction_info",
+          "ckb_udt_info"
+        ],
+        "properties": {
+          "channel_outpoint": {
+            "type": "string",
+            "description": "The outpoint of the channel"
+          },
+          "node1": {
+            "type": "string",
+            "description": "The identity public key of the first node"
+          },
+          "node2": {
+            "type": "string",
+            "description": "The identity public key of the second node"
+          },
+          "created_timestamp": {
+            "type": "string",
+            "description": "The created timestamp of the channel, which is the block header timestamp of the block that contains the channel funding transaction"
+          },
+          "update_info_of_node1": {
+            "type": "object",
+            "description": "The update info from node1 to node2, e.g. timestamp, fee_rate, tlc_expiry_delta, tlc_minimum_value",
+            "$ref": "#/components/schemas/ChannelUpdateInfo",
+            "nullable": true
+          },
+          "update_info_of_node2": {
+            "type": "object",
+            "description": "The update info from node2 to node1, e.g. timestamp, fee_rate, tlc_expiry_delta, tlc_minimum_value",
+            "$ref": "#/components/schemas/ChannelUpdateInfo",
+            "nullable": true
+          },
+          "capacity": {
+            "type": "string",
+            "description": "The capacity of the channel"
+          },
+          "chain_hash": {
+            "type": "string",
+            "description": "The chain hash of the channel"
+          },
+          "ckb_open_transaction_info": {
+            "$ref": "#/components/schemas/CkbOpenTransactionInfo"
+          },
+          "ckb_close_transaction_info": {
+            "$ref": "#/components/schemas/CkbCloseTransactionInfo",
+            "nullable": true
+          },
+          "ckb_udt_info": {
+            "$ref": "#/components/schemas/UdtInfo",
+            "nullable": true
+          }
+        }
+      }
+    }
+  },
+  "ChannelUpdateInfo": {
+    "type": "object",
+    "description": "The channel update info with a single direction of channel",
+    "properties": {
+      "timestamp": {
+        "type": "string",
+        "description": "The timestamp is the time when the channel update was received by the node"
+      },
+      "enabled": {
+        "type": "boolean",
+        "description": "Whether the channel can be currently used for payments (in this one direction)"
+      },
+      "outbound_liquidity": {
+        "type": "string",
+        "description": "The exact amount of balance that we can send to the other party via the channel"
+      },
+      "tlc_expiry_delta": {
+        "type": "string",
+        "description": "The difference in htlc expiry values that you must have when routing through this channel (in milliseconds)"
+      },
+      "tlc_minimum_value": {
+        "type": "string",
+        "description": "The minimum value, which must be relayed to the next hop via the channel"
+      },
+      "fee_rate": {
+        "type": "string",
+        "description": "The forwarding fee rate for the channel"
+      }
+    }
+  },
+  "CkbOpenTransactionInfo": {
+    "type": "object",
+    "description": "Info of the CKB open transaction",
+    "properties": {
+      "tx_hash": {
+        "type": "string",
+        "description": "The transaction hash"
+      },
+      "block_number": {
+        "type": "integer",
+        "description": "The block number in which the transaction was included"
+      },
+      "block_timestamp": {
+        "type": "integer",
+        "description": "The timestamp of the block (in milliseconds)"
+      },
+      "capacity": {
+        "type": "string",
+        "description": "The capacity of the cell (in shannon)"
+      },
+      "ckb_udt_info": {
+        "$ref": "#/components/schemas/CkbOutputUdtInfo"
+      },
+      "address_hash": {
+        "type": "string",
+        "description": "The lock address of the cell"
+      }
+    }
+  },
+  "CkbCloseTransactionInfo": {
+    "type": "object",
+    "description": "Info of the CKB close transaction",
+    "required": [
+      "tx_hash",
+      "block_number",
+      "block_timestamp",
+      "close_accounts"
+    ],
+    "properties": {
+      "tx_hash": {
+        "type": "string",
+        "description": "The transaction hash"
+      },
+      "block_number": {
+        "type": "integer",
+        "description": "The block number in which the transaction was included"
+      },
+      "block_timestamp": {
+        "type": "integer",
+        "description": "The timestamp of the block (in milliseconds)"
+      },
+      "close_accounts": {
+        "type": "array",
+        "description": "Accounts receiving funds when the channel is closed",
+        "items": {
+          "type": "object",
+          "required": ["capacity", "ckb_udt_info", "address_hash"],
+          "properties": {
+            "capacity": {
+              "type": "string",
+              "description": "Capacity (in shannon) received by the account"
+            },
+            "ckb_udt_info": {
+              "$ref": "#/components/schemas/CkbOutputUdtInfo"
+            },
+            "address_hash": {
+              "type": "string",
+              "description": "The address receiving the funds"
+            }
+          }
+        }
+      }
+    }
+  },
+  "CkbOutputUdtInfo": {
+    "type": "object",
+    "description": "UDT metadata associated with the cell",
+    "required": [
+      "full_name",
+      "symbol",
+      "decimal",
+      "icon",
+      "type_hash"
+    ],
+    "properties": {
+      "full_name": {
+        "type": "string",
+        "description": "Full name of the UDT"
+      },
+      "symbol": {
+        "type": "string",
+        "description": "Symbol of the UDT"
+      },
+      "decimal": {
+        "type": "integer",
+        "description": "Decimal precision"
+      },
+      "icon": {
+        "type": "string",
+        "description": "Icon as either a URL or a base64-encoded inline SVG string"
+      },
+      "type_hash": {
+        "type": "string",
+        "description": "Type hash of the UDT"
+      }
+    }
+  }
+}
