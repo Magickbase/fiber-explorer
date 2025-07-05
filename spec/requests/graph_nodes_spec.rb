@@ -4,8 +4,8 @@ RSpec.describe "graph_nodes", type: :request do
   path "/graph_nodes" do
     get("list graph_nodes") do
       produces "application/json"
-      parameter name: :page, in: :query, type: :integer, required: false, default: 1, description: "Page number"
-      parameter name: :page_size, in: :query, type: :integer, required: false, default: 20, description: "Number of items per page"
+      parameter name: :page, in: :query, required: false, schema: { type: :integer, default: 1 }, description: "Page number"
+      parameter name: :page_size, in: :query, required: false, schema: { type: :integer, default: 20 }, description: "Number of items per page"
 
       response(200, "Successful response") do
         schema "$ref": "#/components/schemas/GraphNodes"

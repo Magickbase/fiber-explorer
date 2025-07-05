@@ -16,6 +16,15 @@
         "summary": "list ckb_transactions",
         "parameters": [
           {
+            "name": "node_id",
+            "in": "path",
+            "required": true,
+            "description": "Graph node ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "address_hash",
             "in": "query",
             "required": false,
@@ -55,14 +64,14 @@
             "name": "status",
             "in": "query",
             "required": false,
-            "enum": [
-              "open",
-              "close"
-            ],
-            "description": "Filter by channel status:\n * `open` \n * `close` \n ",
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "enum": [
+                "open",
+                "close"
+              ]
+            },
+            "description": "Filter by channel status"
           },
           {
             "name": "start_date",
@@ -86,36 +95,36 @@
             "name": "sort",
             "in": "query",
             "required": false,
-            "enum": [
-              "position_time.asc",
-              "position_time.desc",
-              "capacity.asc",
-              "capacity.desc"
-            ],
-            "description": "Sort by position time or capacity",
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "enum": [
+                "position_time.asc",
+                "position_time.desc",
+                "capacity.asc",
+                "capacity.desc"
+              ]
+            },
+            "description": "Sort by position time or capacity"
           },
           {
             "name": "page",
             "in": "query",
             "required": false,
-            "default": 1,
-            "description": "Page number",
             "schema": {
-              "type": "integer"
-            }
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
           },
           {
             "name": "page_size",
             "in": "query",
             "required": false,
-            "default": 20,
-            "description": "Number of items per page",
             "schema": {
-              "type": "integer"
-            }
+              "type": "integer",
+              "default": 20
+            },
+            "description": "Number of items per page"
           }
         ],
         "responses": {
@@ -147,6 +156,15 @@
         "summary": "list graph_channels",
         "parameters": [
           {
+            "name": "node_id",
+            "in": "path",
+            "required": true,
+            "description": "Graph node ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "address_hash",
             "in": "query",
             "required": false,
@@ -186,14 +204,14 @@
             "name": "status",
             "in": "query",
             "required": false,
-            "enum": [
-              "open",
-              "close"
-            ],
-            "description": "Filter by channel status:\n * `open` \n * `close` \n ",
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "enum": [
+                "open",
+                "close"
+              ]
+            },
+            "description": "Filter by channel status"
           },
           {
             "name": "start_date",
@@ -217,36 +235,36 @@
             "name": "sort",
             "in": "query",
             "required": false,
-            "enum": [
-              "position_time.asc",
-              "position_time.desc",
-              "capacity.asc",
-              "capacity.desc"
-            ],
-            "description": "Sort by position time or capacity",
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "enum": [
+                "position_time.asc",
+                "position_time.desc",
+                "capacity.asc",
+                "capacity.desc"
+              ]
+            },
+            "description": "Sort by position time or capacity"
           },
           {
             "name": "page",
             "in": "query",
             "required": false,
-            "default": 1,
-            "description": "Page number",
             "schema": {
-              "type": "integer"
-            }
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
           },
           {
             "name": "page_size",
             "in": "query",
             "required": false,
-            "default": 20,
-            "description": "Number of items per page",
             "schema": {
-              "type": "integer"
-            }
+              "type": "integer",
+              "default": 20
+            },
+            "description": "Number of items per page"
           }
         ],
         "responses": {
@@ -319,21 +337,21 @@
             "name": "page",
             "in": "query",
             "required": false,
-            "default": 1,
-            "description": "Page number",
             "schema": {
-              "type": "integer"
-            }
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
           },
           {
             "name": "page_size",
             "in": "query",
             "required": false,
-            "default": 20,
-            "description": "Number of items per page",
             "schema": {
-              "type": "integer"
-            }
+              "type": "integer",
+              "default": 20
+            },
+            "description": "Number of items per page"
           }
         ],
         "responses": {
@@ -426,6 +444,9 @@
               "application/json": {
                 "schema": {
                   "type": "array",
+                  "items": {
+                    "type": "object"
+                  },
                   "description": "Array of search results"
                 }
               }
@@ -523,10 +544,7 @@
                             "description": "Amount of capacity involved"
                           },
                           "ckb_udt_info": {
-                            "type": [
-                              "object",
-                              "null"
-                            ],
+                            "type": "object",
                             "nullable": true,
                             "description": "Optional UDT info if present",
                             "properties": {
@@ -740,7 +758,7 @@
                 "nullable": true
               },
               "ckb_udt_info": {
-                "$ref": "#/components/schemas/UdtInfo",
+                "$ref": "#/components/schemas/CkbOutputUdtInfo",
                 "nullable": true
               }
             }
@@ -798,7 +816,8 @@
             "description": "The capacity of the cell (in shannon)"
           },
           "ckb_udt_info": {
-            "$ref": "#/components/schemas/CkbOutputUdtInfo"
+            "$ref": "#/components/schemas/CkbOutputUdtInfo",
+            "nullable": true
           },
           "address_hash": {
             "type": "string",
@@ -998,10 +1017,7 @@
                 "description": "Unix timestamp (ms) when the node was last updated"
               },
               "deleted_at_timestamp": {
-                "type": [
-                  "string",
-                  "null"
-                ],
+                "type": "string",
                 "nullable": true,
                 "description": "Timestamp (ms) when the node was deleted, or null if active"
               },
@@ -1086,10 +1102,7 @@
               ],
               "properties": {
                 "id": {
-                  "type": [
-                    "string",
-                    "null"
-                  ],
+                  "type": "string",
                   "nullable": true
                 },
                 "type": {
