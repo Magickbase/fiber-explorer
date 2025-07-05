@@ -8,6 +8,7 @@ RSpec.describe "Search API", type: :request do
 
       response(200, "Successful response") do
         schema type: :array,
+               items: { type: :object },
                description: "Array of search results"
 
         run_test!

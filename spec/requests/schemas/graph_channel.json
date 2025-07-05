@@ -109,7 +109,7 @@
             "nullable": true
           },
           "ckb_udt_info": {
-            "$ref": "#/components/schemas/UdtInfo",
+            "$ref": "#/components/schemas/CkbOutputUdtInfo",
             "nullable": true
           }
         }
@@ -167,7 +167,8 @@
         "description": "The capacity of the cell (in shannon)"
       },
       "ckb_udt_info": {
-        "$ref": "#/components/schemas/CkbOutputUdtInfo"
+        "$ref": "#/components/schemas/CkbOutputUdtInfo",
+        "nullable": true
       },
       "address_hash": {
         "type": "string",

@@ -17,10 +17,7 @@
           ],
           "properties": {
             "id": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": "string",
               "nullable": true
             },
             "type": {

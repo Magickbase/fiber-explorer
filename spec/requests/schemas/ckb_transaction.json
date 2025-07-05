@@ -63,7 +63,7 @@
                         "description": "Amount of capacity involved"
                       },
                       "ckb_udt_info": {
-                        "type": ["object", "null"],
+                        "type": "object",
                         "nullable": true,
                         "description": "Optional UDT info if present",
                         "properties": {

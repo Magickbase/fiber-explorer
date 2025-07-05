@@ -109,10 +109,7 @@
             "description": "Unix timestamp (ms) when the node was last updated"
           },
           "deleted_at_timestamp": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": "string",
             "nullable": true,
             "description": "Timestamp (ms) when the node was deleted, or null if active"
           },
