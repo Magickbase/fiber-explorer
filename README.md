@@ -1,1 +1,1 @@
-# fiber-explorer
+For the latest API documentation, visit: https://fiber-docs.magickbase.com/docs
