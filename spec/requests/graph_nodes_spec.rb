@@ -3,7 +3,6 @@ require "swagger_helper"
 RSpec.describe "graph_nodes", type: :request do
   path "/graph_nodes" do
     get("list graph_nodes") do
-      operationId "listGraphNodes"
       produces "application/json"
       parameter name: :page, in: :query, required: false, schema: { type: :integer, default: 1 }, description: "Page number"
       parameter name: :page_size, in: :query, required: false, schema: { type: :integer, default: 20 }, description: "Number of items per page"
@@ -23,7 +22,6 @@ RSpec.describe "graph_nodes", type: :request do
 
   path "/graph_nodes/{node_id}" do
     get("show graph_node") do
-      operationId "showGraphNode"
       produces "application/json"
       parameter name: :node_id, in: :path, type: :string, required: true, description: "Node ID"
 
