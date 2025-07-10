@@ -3,7 +3,6 @@ require "swagger_helper"
 RSpec.describe "graph_channels", type: :request do
   path "/graph_nodes/{node_id}/graph_channels" do
     get("list graph_channels") do
-      operationId "listGraphChannelsByNode"
       produces "application/json"
       parameter name: :node_id, in: :path, type: :string, required: true, description: "Graph node ID"
       parameter name: :address_hash, in: :query, type: :string, required: false, description: "Filter by from/to address of open or close transactions"
@@ -33,7 +32,6 @@ RSpec.describe "graph_channels", type: :request do
 
   path "/graph_channels/{id}" do
     get("show graph_channel") do
-      operationId "showGraphChannel"
       produces "application/json"
       parameter name: :id, in: :path, type: :integer, required: true, description: "Channel ID"
 

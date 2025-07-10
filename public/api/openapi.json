@@ -14,7 +14,6 @@
     "/graph_nodes/{node_id}/ckb_transactions": {
       "get": {
         "summary": "list ckb_transactions",
-        "operationId": "listCkbTransactionsByNode",
         "parameters": [
           {
             "name": "node_id",
@@ -155,7 +154,6 @@
     "/graph_nodes/{node_id}/graph_channels": {
       "get": {
         "summary": "list graph_channels",
-        "operationId": "listGraphChannelsByNode",
         "parameters": [
           {
             "name": "node_id",
@@ -296,7 +294,6 @@
     "/graph_channels/{id}": {
       "get": {
         "summary": "show graph_channel",
-        "operationId": "showGraphChannel",
         "parameters": [
           {
             "name": "id",
@@ -335,7 +332,6 @@
     "/graph_nodes": {
       "get": {
         "summary": "list graph_nodes",
-        "operationId": "listGraphNodes",
         "parameters": [
           {
             "name": "page",
@@ -385,7 +381,6 @@
     "/graph_nodes/{node_id}": {
       "get": {
         "summary": "show graph_node",
-        "operationId": "showGraphNode",
         "parameters": [
           {
             "name": "node_id",
@@ -414,7 +409,6 @@
     "/graph_topology": {
       "get": {
         "summary": "list graph_topology",
-        "operationId": "getGraphTopology",
         "responses": {
           "200": {
             "description": "Successful response",
@@ -432,7 +426,6 @@
     "/search": {
       "get": {
         "summary": "search graph nodes",
-        "operationId": "searchGraphNodes",
         "parameters": [
           {
             "name": "key",
