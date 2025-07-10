@@ -3,6 +3,7 @@ require "swagger_helper"
 RSpec.describe "ckb_transactions", type: :request do
   path "/graph_nodes/{node_id}/ckb_transactions" do
     get("list ckb_transactions") do
+      operationId "listCkbTransactionsByNode"
       produces "application/json"
       parameter name: :node_id, in: :path, type: :string, required: true, description: "Graph node ID"
       parameter name: :address_hash, in: :query, type: :string, required: false, description: "Filter by from/to address of open or close transactions"

@@ -3,6 +3,7 @@ require "swagger_helper"
 RSpec.describe "graph_topology", type: :request do
   path "/graph_topology" do
     get("list graph_topology") do
+      operationId "getGraphTopology"
       produces "application/json"
 
       response(200, "Successful response") do

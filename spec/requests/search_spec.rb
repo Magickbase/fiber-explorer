@@ -3,6 +3,7 @@ require "swagger_helper"
 RSpec.describe "Search API", type: :request do
   path "/search" do
     get("search graph nodes") do
+      operationId "searchGraphNodes"
       produces "application/json"
       parameter name: :key, in: :query, type: :string, required: true, description: "Search keyword"
 
