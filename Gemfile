@@ -34,7 +34,7 @@ gem "jsonapi-serializer"
 gem "dotenv-rails"
 
 # Admin Dashboard
-gem "activeadmin", "= 4.0.0beta15"
+gem "activeadmin", "4.0.0.beta16"
 gem "activeadmin_assets"
 gem "devise"
 
